@@ -1,0 +1,7 @@
+POST http://localhost:3333/accounts
+Content-Type: application/json
+
+{
+  "email": "breno.castro.ofc@gmail.com",
+  "password": "123456"
+}
