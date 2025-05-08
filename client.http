@@ -1,7 +1,42 @@
-POST http://localhost:3333/accounts
+# Utilizando a extensão `Rest Client` é possível realizar
+# requisições HTTP diretamente nos blocos organizados abaixo.
+
+@baseUrl = http://localhost:3333
+@accessToken = {{authenticate.response.body.access_token}}
+
+###
+# @name create
+POST {{baseUrl}}/accounts
 Content-Type: application/json
 
 {
-  "email": "breno.castro.ofc@gmail.com",
+  "name": "Jon Doe",
+  "email": "jondoe@example.com",
   "password": "123456"
 }
+
+###
+# @name authenticate
+POST {{baseUrl}}/authenticate
+Content-Type: application/json
+
+{
+  "email": "jondoe@example.com",
+  "password": "123456"
+}
+
+###
+# @name question
+POST {{baseUrl}}/questions
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "title": "Algo qualquer",
+  "content": "De onde somos? Para onde iremos? Dúvidas assim que nos cercam durante a vida, mas será se ela ainda existe após a morte? Ou seria apenas um eterno e grande vazio? O que seria o vazio? O nada, e o nada, existe? A razão nos convida o encejo dos questionamentos, ao passo que nos responde, pela mais pura lógica que em parte alguma possa existe o vazio, o nada. Logo, onde para nós há o nada, lá há alguma coisa, e se é alguma coisa, não o seria mais o nada."
+}
+
+###
+# @name recents
+GET {{baseUrl}}/recents
+Authorization: Bearer {{accessToken}}
